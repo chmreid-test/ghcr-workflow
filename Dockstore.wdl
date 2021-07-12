@@ -28,6 +28,22 @@ task publicTagImage2 {
   }
 }
 
+task publicDigestImage {
+  String name
+  
+  command {
+    echo 'Hello ${name}!'
+  }
+  output {
+    File response = stdout()
+  }
+  
+  runtime {
+    docker: "ghcr.io/kathy-t/hello-world@sha256:88da9902eff5a6501e5514f5d18d23deb89e3885ea5f7ed52e7ca9abffea15ec"
+  }
+}
+
+
 task privateTagImage {
   String name
   
@@ -46,5 +62,5 @@ task privateTagImage {
 workflow test {
   call publicTagImage
   call publicTagImage2
-  call privateTagImage
+  call publicDigestImage
 }
