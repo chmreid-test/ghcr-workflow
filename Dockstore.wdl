@@ -13,6 +13,21 @@ task publicTagImage {
   }
 }
 
+task publicTagImage2 {
+  String name
+  
+  command {
+    echo 'Hello ${name}!'
+  }
+  output {
+    File response = stdout()
+  }
+  
+  runtime {
+    docker: "ghcr.io/kathy-t/dockstore-tool-helloworld:3"
+  }
+}
+
 task privateTagImage {
   String name
   
@@ -30,5 +45,6 @@ task privateTagImage {
 
 workflow test {
   call publicTagImage
+  call publicTagImage2
   call privateTagImage
 }
