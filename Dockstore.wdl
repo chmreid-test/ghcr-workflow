@@ -44,7 +44,7 @@ task publicDigestImage {
 }
 
 
-task privateTagImage {
+task icgcPublicDigestImage {
   String name
   
   command {
@@ -55,7 +55,7 @@ task privateTagImage {
   }
   
   runtime {
-    docker: "ghcr.io/kathy-t/dockstore-tool-helloworld-private:1"
+    docker: "ghcr.io/icgc-argo/workflow-gateway@sha256:e2d9d5833d6d1cc5698fe1eb11663a6832fdf056cf2827d8ab628234caefaf9d"
   }
 }
 
@@ -63,4 +63,5 @@ workflow test {
   call publicTagImage
   call publicTagImage2
   call publicDigestImage
+  call icgcPublicDigestImage
 }
