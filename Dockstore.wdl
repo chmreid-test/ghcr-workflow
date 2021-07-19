@@ -59,9 +59,25 @@ task icgcPublicDigestImage {
   }
 }
 
+task multiArchPublicImage {
+  String name
+  
+  command {
+    echo 'Hello ${name}!'
+  }
+  output {
+    File response = stdout()
+  }
+  
+  runtime {
+    docker: "ghcr.io/kathy-t/multi-arch-image:1"
+  }
+}
+
 workflow test {
   call publicTagImage
   call publicTagImage2
   call publicDigestImage
   call icgcPublicDigestImage
+  call multiArchPublicImage
 }
