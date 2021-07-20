@@ -31,4 +31,5 @@ task world {
 
 workflow test {
   call hello
+  call world
 }
