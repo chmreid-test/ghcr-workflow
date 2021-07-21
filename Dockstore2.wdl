@@ -29,7 +29,22 @@ task world {
   }
 }
 
+task helloWorld {
+  command {
+    echo 'Hello world!'
+  }
+
+  output {
+    File response = stdout()
+  }
+
+  runtime {
+    docker: "ghcr.io/helm/tiller@sha256:4c43eb385032945cad047d2350e4945d913b90b3ab43ee61cecb32a495c6df0f"
+  }
+}
+
 workflow test {
   call hello
   call world
+  call helloWorld
 }
