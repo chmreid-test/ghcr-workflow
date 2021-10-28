@@ -1,83 +1,50 @@
-task publicTagImage {
-  String name
-  
+
+version 1.0
+
+task hello {
   command {
-    echo 'Hello ${name}!'
+    echo 'Hello!'
   }
+
   output {
     File response = stdout()
   }
-  
+
   runtime {
-    docker: "ghcr.io/kathy-t/dockstore-tool-helloworld:1"
+    docker: "ghcr.io/homebrew/core/python/3.9:3.9.6"
   }
 }
 
-task publicTagImage2 {
-  String name
-  
+task world {
   command {
-    echo 'Hello ${name}!'
+    echo 'World!'
   }
+
   output {
     File response = stdout()
   }
-  
+
   runtime {
-    docker: "ghcr.io/kathy-t/dockstore-tool-helloworld:3"
+    docker: "ghcr.io/homebrew/core/curl:7.77.0-1@sha256:fb8d936ef54845f01c289589985555fd679d774ba9d3eab005417ab2851df7e1"
   }
 }
 
-task publicDigestImage {
-  String name
-  
+task helloWorld {
   command {
-    echo 'Hello ${name}!'
+    echo 'Hello world!'
   }
+
   output {
     File response = stdout()
   }
-  
-  runtime {
-    docker: "ghcr.io/kathy-t/hello-world@sha256:88da9902eff5a6501e5514f5d18d23deb89e3885ea5f7ed52e7ca9abffea15ec"
-  }
-}
 
-
-task icgcPublicDigestImage {
-  String name
-  
-  command {
-    echo 'Hello ${name}!'
-  }
-  output {
-    File response = stdout()
-  }
-  
   runtime {
-    docker: "ghcr.io/icgc-argo/workflow-gateway@sha256:e2d9d5833d6d1cc5698fe1eb11663a6832fdf056cf2827d8ab628234caefaf9d"
-  }
-}
-
-task multiArchPublicImage {
-  String name
-  
-  command {
-    echo 'Hello ${name}!'
-  }
-  output {
-    File response = stdout()
-  }
-  
-  runtime {
-    docker: "ghcr.io/kathy-t/multi-arch-image:1"
+    docker: "ghcr.io/helm/tiller@sha256:4c43eb385032945cad047d2350e4945d913b90b3ab43ee61cecb32a495c6df0f"
   }
 }
 
 workflow test {
-  call publicTagImage
-  call publicTagImage2
-  call publicDigestImage
-  call icgcPublicDigestImage
-  call multiArchPublicImage
+  call hello
+  call world
+  call helloWorld
 }
